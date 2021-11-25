@@ -8,5 +8,4 @@ void outputText(char[ROWS][COLUMNS]);
 void outputTerminal(char[ROWS][COLUMNS]);
 void outputVisitationsTerminal(int[ROWS][COLUMNS]);
 
-
 #endif

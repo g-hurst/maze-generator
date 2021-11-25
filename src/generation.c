@@ -21,6 +21,58 @@ void generateMaze(char maze[ROWS][COLUMNS]){
     
 }
 
+//generates a blank maze of empty rooms
+void fillMaze(char maze[ROWS][COLUMNS]){
+    int j;
+    for(int i = 0; i < ROWS; i++){
+        for(int j = 0; j < COLUMNS; j++){
+            if(i % 2){
+                if(j % 2) maze[i][j] = ' ';
+                else      maze[i][j] = '#';
+            }
+            else maze[i][j] = '#';
+        }
+    }
+}
+
+void walk(int i, int j, char maze[ROWS][COLUMNS], int visitations[ROWS][COLUMNS]){
+    int canWalk = 1;
+    int offLimits;
+    int x = 0, y = 0, N, S, E, W;
+
+    while(canWalk){
+        //updates the maze and the current coordinates
+        maze[i + y / 2][j + x / 2] = ' ';
+        i += y;
+        j += x;   
+
+        //sets the current square that is visited to 1
+        visitations[i][j] = 1;     
+        
+        //gets a valid direction
+        N = 0, S = 0, E = 0, W = 0; //reset directional values
+        do{
+            getDirection(&x, &y);
+
+            //checks if the direction is north, south, east, or west
+            canWalk = !(N && S && E && W); //if every direction has been checked, STOP
+            if      (!x && y > 0)   N = 1;
+            else if (!x && y < 0)   S = 1;
+            else if (x > 0 && !y)   E = 1;
+            else                    W = 1;
+
+            //checks bounds and makes sure the room has not been visited
+            offLimits = outOfBounds(i + y, j + x, visitations);
+            offLimits += visitations[i + y][j + x] == 1;
+        }while(offLimits && canWalk);
+    }
+
+    //recursivly calls the walk function in order to generate paths throughout the rest of the maze
+    if(findNextWalk(&i, &j, visitations)) {
+        walk(i, j, maze, visitations);
+        }
+}
+
 //searches the arr for the adjavent rooms that are unique. assigns the room that
 // has been visted to (j, i) so the next walk can be started
 // returns 1 if the end of the arr has been reached
@@ -65,44 +117,6 @@ int findNextWalk(int *i, int *j, int visitations[ROWS][COLUMNS]){
     return 0;
 }
 
-void walk(int i, int j, char maze[ROWS][COLUMNS], int visitations[ROWS][COLUMNS]){
-    int canWalk = 1;
-    int offLimits;
-    int x = 0, y = 0, N, S, E, W;
-
-    while(canWalk){
-        //updates the maze and the current coordinates
-        maze[i + y / 2][j + x / 2] = ' ';
-        i += y;
-        j += x;   
-
-        //sets the current square that is visited to 1
-        visitations[i][j] = 1;     
-        
-        //gets a valid direction
-        N = 0, S = 0, E = 0, W = 0; //reset directional values
-        do{
-            getDirection(&x, &y);
-
-            //checks if the direction is north, south, east, or west
-            canWalk = !(N && S && E && W); //if every direction has been checked, STOP
-            if      (!x && y > 0)   N = 1;
-            else if (!x && y < 0)   S = 1;
-            else if (x > 0 && !y)   E = 1;
-            else                    W = 1;
-
-            //checks bounds and makes sure the room has not been visited
-            offLimits = outOfBounds(i + y, j + x, visitations);
-            offLimits += visitations[i + y][j + x] == 1;
-        }while(offLimits && canWalk);
-    }
-
-    //recursivly calls the walk function in order to generate paths throughout the rest of the maze
-    if(findNextWalk(&i, &j, visitations)) {
-        walk(i, j, maze, visitations);
-        }
-}
-
 int outOfBounds(int i, int j, int visitations[ROWS][COLUMNS]){
     int offLimits;
 
@@ -127,18 +141,4 @@ void getDirection(int *x, int *y){
     //chooses a random direction to shift the array
     if(rand() % 2) *x =+ val;
     else           *y =+ val;
-}
-
-//generates a blank maze of empty rooms
-void fillMaze(char maze[ROWS][COLUMNS]){
-    int j;
-    for(int i = 0; i < ROWS; i++){
-        for(int j = 0; j < COLUMNS; j++){
-            if(i % 2){
-                if(j % 2) maze[i][j] = ' ';
-                else      maze[i][j] = '#';
-            }
-            else maze[i][j] = '#';
-        }
-    }
 }
