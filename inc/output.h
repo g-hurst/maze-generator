@@ -4,9 +4,9 @@
 #define ROWS 15
 #define COLUMNS 15
 
-void outputText(char maze[ROWS][COLUMNS]);
-void outputTerminal(char maze[ROWS][COLUMNS]);
-void outputVisitationsTerminal(int maze[ROWS][COLUMNS]);
+void outputText(char[ROWS][COLUMNS]);
+void outputTerminal(char[ROWS][COLUMNS]);
+void outputVisitationsTerminal(int[ROWS][COLUMNS]);
 
 
 #endif
