@@ -5,6 +5,10 @@
 #define ROWS 15
 #define COLUMNS 15
 
+#include <stdio.h>
+#include "E:\programming projects\maze-generator\inc\output.h"
+
+
 //function that generates the maze when given an array
 void generateMaze(char maze[ROWS][COLUMNS]){
     int visitations[ROWS][COLUMNS] = {0}; //array to keep track of what rooms have been visited
@@ -17,32 +21,58 @@ void generateMaze(char maze[ROWS][COLUMNS]){
     i = (rand() % (ROWS - 2) / 2) * 2 + 1;     //scales to [1, rows - 2] only odd numbers
     j = (rand() % (COLUMNS - 2) / 2) * 2 + 1;
 
-    firstWalk(i, j, maze, visitations);
-    mazeify(i, j, maze, visitations);
+    walk(i, j, maze, visitations);
+    
 }
 
 
-//searches the loop for the next unvisited room starting at (j, i); returns 1 if the end of the arr has been reached
-int findUnvisited(int *i, int *j, int visitations[ROWS][COLUMNS]){
+//searches the arr for the adjavent rooms that are unique. assigns the room that
+// has been visted to (j, i) so the next walk can be started
+// returns 1 if the end of the arr has been reached
+int findNextWalk(int *i, int *j, int visitations[ROWS][COLUMNS]){
     int endOfArr = 0;
     int col;
     
     for(int row = 1; row < ROWS; row += 2){
         for(col = 1; col < COLUMNS; col += 2){
-            if(visitations[row][col] == 0){
-                *i = row;
-                *j = col;
-                return 0;;
+            //check current room and adjacent east are different and the east is in bounds
+            if(visitations[row][col] != visitations[row][col + 2] && !outOfBounds(row, col + 2, visitations)){
+                //if the room has been visited and is not out of bounds set i and j
+                if(visitations[row][col]){
+                    *i = row;
+                    *j = col;
+                    return 1;
+                    }
+                else{
+                    *i = row;
+                    *j = col + 2;
+                    return 1;  
+                }
+            }
+
+            //check current room and adjacent south are different and the south is in bounds
+            else if(visitations[row][col] != visitations[row + 2][col] && !outOfBounds(row + 2, col, visitations)){
+                //if the room has been visited and is not out of bounds set i and j
+                if(visitations[row][col]){
+                    *i = row;
+                    *j = col;
+                    return 1;
+                    }
+                else{
+                    *i = row + 2;
+                    *j = col;
+                    return 1;  
+                }
             }
         }
     }
 
-    return 1;
+    return 0;
 }
 
-void firstWalk(int i, int j, char maze[ROWS][COLUMNS], int visitations[ROWS][COLUMNS]){
+void walk(int i, int j, char maze[ROWS][COLUMNS], int visitations[ROWS][COLUMNS]){
     int canWalk = 1;
-    int offLimits; 
+    int offLimits;
     int x = 0, y = 0, N, S, E, W;
 
     while(canWalk){
@@ -66,49 +96,26 @@ void firstWalk(int i, int j, char maze[ROWS][COLUMNS], int visitations[ROWS][COL
             else if (x > 0 && !y)   E = 1;
             else                    W = 1;
 
-            //assures that the point is valid
-            offLimits = i + y <= 0 || i + y >= ROWS - 1;
-            offLimits += j + x <= 0 || j + x >= COLUMNS - 1;
+            //checks bounds and makes sure the room has not been visited
+            offLimits = outOfBounds(i + y, j + x, visitations);
             offLimits += visitations[i + y][j + x] == 1;
         }while(offLimits && canWalk);
     }
+
+    //recursivly calls the walk function in order to generate paths throughout the rest of the maze
+    if(findNextWalk(&i, &j, visitations)) {
+        walk(i, j, maze, visitations);
+        }
 }
 
-//genrates the remaining portion of the maze after the first walk has been performed
-void mazeify(int i, int j, char maze[ROWS][COLUMNS], int visitations[ROWS][COLUMNS]){
-    int pathNotFound = 1;
+int outOfBounds(int i, int j, int visitations[ROWS][COLUMNS]){
     int offLimits;
-    int x = 0, y = 0, xOld, yOld;
 
-    //findUnvisited(&i, &j, visitations);
-    
-    while(pathNotFound){
-        xOld = x;
-        yOld = y;
+    //checks the bounds and if the room has been visited
+    offLimits = i <= 0 || i >= ROWS - 1;
+    offLimits += j <= 0 || j >= COLUMNS - 1;
 
-        //sets the current square to visited
-        visitations[i][j] = 1;
-
-        do{
-            getDirection(&x, &y);
-
-            //checks to see if the direction is out of bounds and not back tracking
-            offLimits = i + y <= 0 || i + y >= ROWS - 1;
-            offLimits += j + x <= 0 || j + x >= COLUMNS - 1;
-            offLimits += -x == xOld && -y == yOld;
-        }while(offLimits);
-        
-        //updates the maze and the current coordinates
-        i += y;
-        j += x;
-        maze[i - y / 2][j - x / 2] = ' ';
-
-        //checks if the space has been visited
-        if(visitations[i][j] == 1) pathNotFound = 0; 
-    }
-
-    //recursivly calls the mazify function to fill the rest of the maze
-    if(findUnvisited(&i, &j, visitations) == 0) mazeify(i, j, maze, visitations);
+    return offLimits;
 }
 
 //sets x and y to a random cardinal direction multiplied by two
