@@ -21,7 +21,6 @@ void generateMaze(char maze[ROWS][COLUMNS]){
     
 }
 
-
 //searches the arr for the adjavent rooms that are unique. assigns the room that
 // has been visted to (j, i) so the next walk can be started
 // returns 1 if the end of the arr has been reached
