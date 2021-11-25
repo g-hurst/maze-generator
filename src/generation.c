@@ -5,10 +5,6 @@
 #define ROWS 15
 #define COLUMNS 15
 
-#include <stdio.h>
-#include "E:\programming projects\maze-generator\inc\output.h"
-
-
 //function that generates the maze when given an array
 void generateMaze(char maze[ROWS][COLUMNS]){
     int visitations[ROWS][COLUMNS] = {0}; //array to keep track of what rooms have been visited
