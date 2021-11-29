@@ -18,7 +18,7 @@ void generateMaze(char maze[ROWS][COLUMNS]){
     j = (rand() % (COLUMNS - 2) / 2) * 2 + 1;
 
     walk(i, j, maze, visitations);
-    
+    createHoles(maze);
 }
 
 //generates a blank maze of empty rooms
@@ -33,6 +33,19 @@ void fillMaze(char maze[ROWS][COLUMNS]){
             else maze[i][j] = '#';
         }
     }
+}
+
+//generates the start and finish for the maze
+void createHoles(char maze[ROWS][COLUMNS]){
+    int start, finish;
+
+    //choose a random wall to remove
+    start  = rand() % (ROWS - 2) + 1;
+    finish = rand() % (ROWS - 2) + 1;
+
+    //removes the walls to create entrance and exit
+    maze[start][0] = ' ';
+    maze[finish][COLUMNS - 1] = ' ';
 }
 
 void walk(int i, int j, char maze[ROWS][COLUMNS], int visitations[ROWS][COLUMNS]){
@@ -84,7 +97,7 @@ int findNextWalk(int *i, int *j, int visitations[ROWS][COLUMNS]){
         for(col = 1; col < COLUMNS; col += 2){
             //check current room and adjacent east are different and the east is in bounds
             if(visitations[row][col] != visitations[row][col + 2] && !outOfBounds(row, col + 2, visitations)){
-                //if the room has been visited and is not out of bounds set i and j
+                //if the room has been visited set i and j
                 if(visitations[row][col]){
                     *i = row;
                     *j = col;
@@ -99,7 +112,7 @@ int findNextWalk(int *i, int *j, int visitations[ROWS][COLUMNS]){
 
             //check current room and adjacent south are different and the south is in bounds
             else if(visitations[row][col] != visitations[row + 2][col] && !outOfBounds(row + 2, col, visitations)){
-                //if the room has been visited and is not out of bounds set i and j
+                //if the room has been visited set i and j
                 if(visitations[row][col]){
                     *i = row;
                     *j = col;

@@ -6,6 +6,7 @@
 
 void fillMaze(char[ROWS][COLUMNS]);
 void generateMaze(char[ROWS][COLUMNS]);
+void createHoles(char[ROWS][COLUMNS]);
 
 void walk(int, int, char[ROWS][COLUMNS], int[ROWS][COLUMNS]);
 int findNextWalk(int*, int*, int[ROWS][COLUMNS]);
