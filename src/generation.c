@@ -39,13 +39,19 @@ void fillMaze(char maze[ROWS][COLUMNS]){
 void createHoles(char maze[ROWS][COLUMNS]){
     int start, finish;
 
-    //choose a random wall to remove
-    start  = rand() % (ROWS - 2) + 1;
-    finish = rand() % (ROWS - 2) + 1;
-
+    //gets start position
+    do{
+        start  = rand() % (ROWS - 2) + 1;
+    }while(maze[start][1] == '#');
+    
+    //gets finsih position
+    do{
+        finish = rand() % (ROWS - 2) + 1;
+    }while(maze[finish][COLUMNS - 2] == '#');
+    
     //removes the walls to create entrance and exit
     maze[start][0] = ' ';
-    maze[finish][COLUMNS - 1] = ' ';
+    maze[finish][COLUMNS - 1] = ' ';  
 }
 
 void walk(int i, int j, char maze[ROWS][COLUMNS], int visitations[ROWS][COLUMNS]){
