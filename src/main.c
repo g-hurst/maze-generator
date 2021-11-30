@@ -1,5 +1,5 @@
-#include "E:\programming projects\maze-generator\inc\output.h"
-#include "E:\programming projects\maze-generator\inc\generation.h"
+#include "../inc/output.h"
+#include "../inc/generation.h"
 
 #define ROWS 15
 #define COLUMNS 15

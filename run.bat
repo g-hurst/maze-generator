@@ -1,5 +1,5 @@
 @echo off
-gcc -o app "E:\programming projects\maze-generator\src\main.c" "E:\programming projects\maze-generator\src\otuput.c" "E:\programming projects\maze-generator\src\generation.c"
+gcc -o app "src\main.c" "src\otuput.c" "src\generation.c"
 
 app.exe
 Del app.exe
