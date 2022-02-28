@@ -6,26 +6,26 @@
 #define COLUMNS 15
 
 //function that generates the maze when given an array
-void generateMaze(char maze[ROWS][COLUMNS]){
+void generateMaze(char** maze, int rows, int cols){
     int visitations[ROWS][COLUMNS] = {0}; //array to keep track of what rooms have been visited
     int x, y, i, j;
 
     srand(time(0));
-    fillMaze(maze);
+    fillMaze(maze, rows, cols);
     
     //start the walk at a random location within the maze
-    i = (rand() % (ROWS - 2) / 2) * 2 + 1;     //scales to [1, rows - 2] only odd numbers
-    j = (rand() % (COLUMNS - 2) / 2) * 2 + 1;
+    i = (rand() % (rows - 2) / 2) * 2 + 1;     //scales to [1, rows - 2] only odd numbers
+    j = (rand() % (cols - 2) / 2) * 2 + 1;
 
-    walk(i, j, maze, visitations);
-    createHoles(maze);
+    walk(i, j, maze, visitations, rows, cols);
+    createHoles(maze, rows, cols);
 }
 
 //generates a blank maze of empty rooms
-void fillMaze(char maze[ROWS][COLUMNS]){
+void fillMaze(char** maze, int rows, int cols){
     int j;
-    for(int i = 0; i < ROWS; i++){
-        for(int j = 0; j < COLUMNS; j++){
+    for(int i = 0; i < rows; i++){
+        for(int j = 0; j < cols; j++){
             if(i % 2){
                 if(j % 2) maze[i][j] = ' ';
                 else      maze[i][j] = '#';
@@ -36,25 +36,25 @@ void fillMaze(char maze[ROWS][COLUMNS]){
 }
 
 //generates the start and finish for the maze
-void createHoles(char maze[ROWS][COLUMNS]){
+void createHoles(char** maze, int rows, int cols){
     int start, finish;
 
     //gets start position
     do{
-        start  = rand() % (ROWS - 2) + 1;
+        start  = rand() % (rows - 2) + 1;
     }while(maze[start][1] == '#');
     
     //gets finsih position
     do{
-        finish = rand() % (ROWS - 2) + 1;
-    }while(maze[finish][COLUMNS - 2] == '#');
+        finish = rand() % (rows - 2) + 1;
+    }while(maze[finish][cols - 2] == '#');
     
     //removes the walls to create entrance and exit
     maze[start][0] = ' ';
-    maze[finish][COLUMNS - 1] = ' ';  
+    maze[finish][cols - 1] = ' ';  
 }
 
-void walk(int i, int j, char maze[ROWS][COLUMNS], int visitations[ROWS][COLUMNS]){
+void walk(int i, int j, char** maze, int visitations[ROWS][COLUMNS], int rows, int cols){
     int canWalk = 1;
     int offLimits;
     int x = 0, y = 0, N, S, E, W;
@@ -88,7 +88,7 @@ void walk(int i, int j, char maze[ROWS][COLUMNS], int visitations[ROWS][COLUMNS]
 
     //recursivly calls the walk function in order to generate paths throughout the rest of the maze
     if(findNextWalk(&i, &j, visitations)) {
-        walk(i, j, maze, visitations);
+        walk(i, j, maze, visitations, rows, cols);
         }
 }
 

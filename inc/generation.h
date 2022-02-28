@@ -4,11 +4,11 @@
 #define ROWS 15
 #define COLUMNS 15
 
-void fillMaze(char[ROWS][COLUMNS]);
-void generateMaze(char[ROWS][COLUMNS]);
-void createHoles(char[ROWS][COLUMNS]);
+void fillMaze(char**, int, int);
+void generateMaze(char**, int, int);
+void createHoles(char**, int, int);
 
-void walk(int, int, char[ROWS][COLUMNS], int[ROWS][COLUMNS]);
+void walk(int, int, char**, int[ROWS][COLUMNS], int, int);
 int findNextWalk(int*, int*, int[ROWS][COLUMNS]);
 
 int outOfBounds(int, int, int[ROWS][COLUMNS]);

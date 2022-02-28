@@ -11,8 +11,6 @@ struct Maze{
     int **vis;
 };
 
-
-
 int main(){
     char maze[ROWS][COLUMNS];   //arr to create the maze
     int rows = 15, cols = 15;
@@ -24,14 +22,7 @@ int main(){
         mzStack[i] = malloc(cols * sizeof(mzStack));
     }
 
-    generateMaze(maze);       //generates the maze
-
-    // assigns values to the maze
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
-            mzStack[i][j] = maze[i][j];
-        }
-    }
+    generateMaze(mzStack, rows, cols);       //generates the maze
 
     outputText(mzStack, rows, cols);        //outputs the maze to a text file
 
