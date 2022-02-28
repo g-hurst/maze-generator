@@ -4,8 +4,8 @@
 #define ROWS 15
 #define COLUMNS 15
 
-void outputText(char[ROWS][COLUMNS]);
-void outputTerminal(char[ROWS][COLUMNS]);
+void outputText(char**, int, int);
+void outputTerminal(char**, int, int);
 void outputVisitationsTerminal(int[ROWS][COLUMNS]);
 
 #endif
