@@ -4,7 +4,8 @@
 #define COLUMNS 15
 
 //outputs the maze to a text file
-void outputText(char maze[ROWS][COLUMNS]){
+void outputText(char maze[ROWS][COLUMNS])
+{
     FILE *fp;
     char start[11] = "\nSTART--> \0";
     char blank[11] = "\n         \0";
