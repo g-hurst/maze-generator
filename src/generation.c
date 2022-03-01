@@ -99,8 +99,8 @@ int findNextWalk(int *i, int *j, int visitations[ROWS][COLUMNS], int rows, int c
     int endOfArr = 0;
     int col;
     
-    for(int row = 1; row < ROWS; row += 2){
-        for(col = 1; col < COLUMNS; col += 2){
+    for(int row = 1; row < rows; row += 2){
+        for(col = 1; col < cols; col += 2){
             //check current room and adjacent east are different and the east is in bounds
             if(visitations[row][col] != visitations[row][col + 2] && !outOfBounds(row, col + 2, rows, cols)){
                 //if the room has been visited set i and j
