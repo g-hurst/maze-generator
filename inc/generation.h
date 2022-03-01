@@ -9,9 +9,9 @@ void generateMaze(char**, int, int);
 void createHoles(char**, int, int);
 
 void walk(int, int, char**, int[ROWS][COLUMNS], int, int);
-int findNextWalk(int*, int*, int[ROWS][COLUMNS]);
+int findNextWalk(int*, int*, int[ROWS][COLUMNS], int, int);
 
-int outOfBounds(int, int);
+int outOfBounds(int, int, int, int);
 void getDirection(int*, int*);
 
 

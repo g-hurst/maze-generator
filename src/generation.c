@@ -81,13 +81,13 @@ void walk(int i, int j, char** maze, int visitations[ROWS][COLUMNS], int rows, i
             else                    W = 1;
 
             //checks bounds and makes sure the room has not been visited
-            offLimits = outOfBounds(i + y, j + x);
+            offLimits = outOfBounds(i + y, j + x, rows, cols);
             offLimits += visitations[i + y][j + x] == 1;
         }while(offLimits && canWalk);
     }
 
     //recursivly calls the walk function in order to generate paths throughout the rest of the maze
-    if(findNextWalk(&i, &j, visitations)) {
+    if(findNextWalk(&i, &j, visitations, rows, cols)) {
         walk(i, j, maze, visitations, rows, cols);
         }
 }
@@ -95,14 +95,14 @@ void walk(int i, int j, char** maze, int visitations[ROWS][COLUMNS], int rows, i
 //searches the arr for the adjavent rooms that are unique. assigns the room that
 // has been visted to (j, i) so the next walk can be started
 // returns 1 if the end of the arr has been reached
-int findNextWalk(int *i, int *j, int visitations[ROWS][COLUMNS]){
+int findNextWalk(int *i, int *j, int visitations[ROWS][COLUMNS], int rows, int cols){
     int endOfArr = 0;
     int col;
     
     for(int row = 1; row < ROWS; row += 2){
         for(col = 1; col < COLUMNS; col += 2){
             //check current room and adjacent east are different and the east is in bounds
-            if(visitations[row][col] != visitations[row][col + 2] && !outOfBounds(row, col + 2)){
+            if(visitations[row][col] != visitations[row][col + 2] && !outOfBounds(row, col + 2, rows, cols)){
                 //if the room has been visited set i and j
                 if(visitations[row][col]){
                     *i = row;
@@ -117,7 +117,7 @@ int findNextWalk(int *i, int *j, int visitations[ROWS][COLUMNS]){
             }
 
             //check current room and adjacent south are different and the south is in bounds
-            else if(visitations[row][col] != visitations[row + 2][col] && !outOfBounds(row + 2, col)){
+            else if(visitations[row][col] != visitations[row + 2][col] && !outOfBounds(row + 2, col, rows, cols)){
                 //if the room has been visited set i and j
                 if(visitations[row][col]){
                     *i = row;
@@ -136,12 +136,12 @@ int findNextWalk(int *i, int *j, int visitations[ROWS][COLUMNS]){
     return 0;
 }
 
-int outOfBounds(int i, int j){
+int outOfBounds(int i, int j, int rows, int cols){
     int offLimits;
 
     //checks the bounds and if the room has been visited
-    offLimits = i <= 0 || i >= ROWS - 1;
-    offLimits += j <= 0 || j >= COLUMNS - 1;
+    offLimits = i <= 0 || i >= rows - 1;
+    offLimits += j <= 0 || j >= cols - 1;
 
     return offLimits;
 }
