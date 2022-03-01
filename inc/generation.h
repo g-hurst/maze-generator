@@ -11,7 +11,7 @@ void createHoles(char**, int, int);
 void walk(int, int, char**, int[ROWS][COLUMNS], int, int);
 int findNextWalk(int*, int*, int[ROWS][COLUMNS]);
 
-int outOfBounds(int, int, int[ROWS][COLUMNS]);
+int outOfBounds(int, int);
 void getDirection(int*, int*);
 
 

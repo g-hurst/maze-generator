@@ -81,7 +81,7 @@ void walk(int i, int j, char** maze, int visitations[ROWS][COLUMNS], int rows, i
             else                    W = 1;
 
             //checks bounds and makes sure the room has not been visited
-            offLimits = outOfBounds(i + y, j + x, visitations);
+            offLimits = outOfBounds(i + y, j + x);
             offLimits += visitations[i + y][j + x] == 1;
         }while(offLimits && canWalk);
     }
@@ -102,7 +102,7 @@ int findNextWalk(int *i, int *j, int visitations[ROWS][COLUMNS]){
     for(int row = 1; row < ROWS; row += 2){
         for(col = 1; col < COLUMNS; col += 2){
             //check current room and adjacent east are different and the east is in bounds
-            if(visitations[row][col] != visitations[row][col + 2] && !outOfBounds(row, col + 2, visitations)){
+            if(visitations[row][col] != visitations[row][col + 2] && !outOfBounds(row, col + 2)){
                 //if the room has been visited set i and j
                 if(visitations[row][col]){
                     *i = row;
@@ -117,7 +117,7 @@ int findNextWalk(int *i, int *j, int visitations[ROWS][COLUMNS]){
             }
 
             //check current room and adjacent south are different and the south is in bounds
-            else if(visitations[row][col] != visitations[row + 2][col] && !outOfBounds(row + 2, col, visitations)){
+            else if(visitations[row][col] != visitations[row + 2][col] && !outOfBounds(row + 2, col)){
                 //if the room has been visited set i and j
                 if(visitations[row][col]){
                     *i = row;
@@ -136,7 +136,7 @@ int findNextWalk(int *i, int *j, int visitations[ROWS][COLUMNS]){
     return 0;
 }
 
-int outOfBounds(int i, int j, int visitations[ROWS][COLUMNS]){
+int outOfBounds(int i, int j){
     int offLimits;
 
     //checks the bounds and if the room has been visited
