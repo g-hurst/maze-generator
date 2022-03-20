@@ -3,7 +3,7 @@
 ### How to run:
 **option 1:**
 1. run `make`
-   * creates the executable
+  * creates the executable
 2.  run `generate_maze.exe [rows] [columns]`
   * rows is the amount of rows the generated maze will contain
   * cols is the amount of columns the generated maze will contain
