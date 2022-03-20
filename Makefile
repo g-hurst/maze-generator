@@ -1,4 +1,4 @@
-# Inviroment input
+# Enviroment input
 ROWS := 25
 COLS := 25
 
@@ -27,10 +27,10 @@ run: $(EXECUTABLE)
 test: $(EXECUTABLE)
 	valgrind $(MEM_FLAGS) ./$(EXECUTABLE) $(ARGS)
 
-coverage: $(SRC_C) $(SRC_H)
-	$(CC) $(CFLAGS_GCOV) -o $(EXECUTABLE_GCOV) $(SRC_C)
-	./$(EXECUTABLE_GCOV)
-	gcov -f $(SRC_C)
+# coverage: $(SRC_C) $(SRC_H)
+# 	$(CC) $(CFLAGS_GCOV) -o $(EXECUTABLE_GCOV) $(SRC_C)
+# 	./$(EXECUTABLE_GCOV)
+# 	gcov -f $(SRC_C)
 
 clean:
 	$(OUT) "Files removed on clean: "

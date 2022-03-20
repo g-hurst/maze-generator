@@ -1,14 +1,17 @@
 # maze-generator
 
-**This project generates a random maze**
+### How to run:
+
+### Requirements to run this code
 * maze rows and columns must be greater than three units
 * maze rows and columns must be odd numbers
+* if either of these is not met, a terminal message will prompt for an input to replace the invalid size
 
 
 The algorithm used to generate the maze is a variation of the Hunt and Kill algorithm. The difference in this generator is that instead of looping through the individual searches and path generations, path generations are recursivly called within the walk funciton. 
 
 
-**algorithm is as follows:**
+### algorithm is as follows:
 
 1. start at a random room and mark it as visited
 2. randomly select an adjacent, unvisited, in bounds room
