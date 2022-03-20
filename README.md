@@ -8,12 +8,13 @@
    * rows is the amount of rows the generated maze will contain
    * cols is the amount of columns the generated maze will contain
    * defaults to 25 if not specified
+
 **option 2:**
 1. run `make run ROWS=[rows] COLS=[columns]`
    * rows is the amount of rows the generated maze will contain
    * cols is the amount of columns the generated maze will contain
    * defaults to 25 if not specified
-   
+
 ### Requirements to run this code:
 * maze rows and columns must be greater than three units
 * maze rows and columns must be odd numbers
