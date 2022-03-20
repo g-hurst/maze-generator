@@ -1,7 +1,6 @@
 #include "../inc/output.h"
 #include "../inc/generation.h"
 #include <stdlib.h>
-#include "../inc/clog.h"
 
 int main(int argc, char* argv[]) {
     int rows = atoi(argv[1]);
