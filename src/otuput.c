@@ -1,7 +1,5 @@
 #include <stdio.h>
 #include "../inc/output.h"
-#define ROWS 15
-#define COLUMNS 15
 
 //outputs the maze to a text file
 void outputText(char** maze, int rows, int cols)

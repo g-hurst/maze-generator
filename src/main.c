@@ -3,15 +3,6 @@
 #include <stdlib.h>
 #include "../inc/clog.h"
 
-#define ROWS 15
-#define COLUMNS 15
-/*
-struct Maze{
-    int rows, cols;
-    char **arr;
-    int **vis;
-};
-*/
 int main(){
     int rows = 15, cols = 15;
     char** mzStack = malloc(rows * sizeof(*mzStack));

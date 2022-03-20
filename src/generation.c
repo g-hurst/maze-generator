@@ -2,9 +2,6 @@
 #include <time.h>
 #include "../inc/generation.h"
 
-#define ROWS 15
-#define COLUMNS 15
-
 //function that generates the maze when given an array
 void generateMaze(char** maze, int rows, int cols){
     // int visitations[ROWS][COLUMNS] = {0}; //array to keep track of what rooms have been visited

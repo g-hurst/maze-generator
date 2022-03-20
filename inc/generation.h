@@ -1,9 +1,6 @@
 #ifndef GENERATION_H_
 #define GENERATION_H_
 
-#define ROWS 15
-#define COLUMNS 15
-
 void fillMaze(char**, int, int);
 void generateMaze(char**, int, int);
 void createHoles(char**, int, int);
