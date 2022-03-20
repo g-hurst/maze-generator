@@ -2,7 +2,7 @@
 
 ### How to run:
 
-### Requirements to run this code
+### Requirements to run this code:
 * maze rows and columns must be greater than three units
 * maze rows and columns must be odd numbers
 * if either of these is not met, a terminal message will prompt for an input to replace the invalid size
