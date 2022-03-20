@@ -7,8 +7,16 @@
 
 //function that generates the maze when given an array
 void generateMaze(char** maze, int rows, int cols){
-    int visitations[ROWS][COLUMNS] = {0}; //array to keep track of what rooms have been visited
+    // int visitations[ROWS][COLUMNS] = {0}; //array to keep track of what rooms have been visited
     int i, j;
+
+	int **visitations = malloc(rows * sizeof(*visitations));
+	for(int m = 0; m < cols; m++) {
+        visitations[m] = malloc((cols + 1) * sizeof(*visitations[m]));
+		for(int n = 0; n < cols; n++) {
+        	visitations[m][n] = 0;
+		}
+	}
 
     srand(time(0));
     fillMaze(maze, rows, cols);
@@ -19,11 +27,16 @@ void generateMaze(char** maze, int rows, int cols){
 
     walk(i, j, maze, visitations, rows, cols);
     createHoles(maze, rows, cols);
+
+    // frees allocated memory
+    for (int m = 0; m < cols; m++) {
+        free(visitations[m]);
+    }
+    free(visitations);
 }
 
 //generates a blank maze of empty rooms
 void fillMaze(char** maze, int rows, int cols){
-    int j;
     for(int i = 0; i < rows; i++){
         for(int j = 0; j < cols; j++){
             if(i % 2){
@@ -54,7 +67,7 @@ void createHoles(char** maze, int rows, int cols){
     maze[finish][cols - 1] = ' ';  
 }
 
-void walk(int i, int j, char** maze, int visitations[ROWS][COLUMNS], int rows, int cols){
+void walk(int i, int j, char** maze, int** visitations, int rows, int cols){
     int canWalk = 1;
     int offLimits;
     int x = 0, y = 0, N, S, E, W;
@@ -94,14 +107,13 @@ void walk(int i, int j, char** maze, int visitations[ROWS][COLUMNS], int rows, i
 //searches the arr for the adjavent rooms that are unique. assigns the room that
 // has been visted to (j, i) so the next walk can be started
 // returns 1 if the end of the arr has been reached
-int findNextWalk(int *i, int *j, int visitations[ROWS][COLUMNS], int rows, int cols){
-    int endOfArr = 0;
+int findNextWalk(int *i, int *j, int** visitations, int rows, int cols){
     int col;
     
     for(int row = 1; row < rows; row += 2){
         for(col = 1; col < cols; col += 2){
             //check current room and adjacent east are different and the east is in bounds
-            if(visitations[row][col] != visitations[row][col + 2] && !outOfBounds(row, col + 2, rows, cols)){
+            if(!outOfBounds(row, col + 2, rows, cols) && visitations[row][col] != visitations[row][col + 2]){
                 //if the room has been visited set i and j
                 if(visitations[row][col]){
                     *i = row;
