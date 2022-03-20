@@ -38,7 +38,7 @@ void outputTerminal(char** maze, int rows, int cols){
         }
 
         //prints end
-        if(maze[i][COLUMNS - 1] == ' ') printf(" <--END");
+        if(maze[i][cols - 1] == ' ') printf(" <--END");
     }
 }
 

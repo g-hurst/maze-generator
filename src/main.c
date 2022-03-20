@@ -4,9 +4,13 @@
 #include "../inc/clog.h"
 
 int main(){
-    int rows = 15, cols = 15;
+    int rows, cols;
+	printf("Enter rows: ");
+	scanf("%d", &rows);
+	printf("Enter columns: ");
+	scanf("%d", &cols);
+
     char** mzStack = malloc(rows * sizeof(*mzStack));
-    
     for (int i = 0; i < cols; i++) {
         mzStack[i] = malloc((cols + 1) * sizeof(*mzStack[i]));
         mzStack[i][cols] = '\0';
