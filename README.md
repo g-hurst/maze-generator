@@ -5,9 +5,9 @@
 1. run `make`
    * creates the executable
 2.  run `generate_maze.exe [rows] [columns]`
-   * rows is the amount of rows the generated maze will contain
-   * cols is the amount of columns the generated maze will contain
-   * defaults to 25 if not specified
+    * rows is the amount of rows the generated maze will contain
+    * cols is the amount of columns the generated maze will contain
+    * defaults to 25 if not specified
 
 **option 2:**
 1. run `make run ROWS=[rows] COLS=[columns]`
