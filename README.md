@@ -1,6 +1,8 @@
 # maze-generator
 
-This project generates a random 15 x 15 maze
+**This project generates a random square maze**
+* maze must be greater than three units wide
+* maze size must be an odd number
 
 
 The algorithm used to generate the maze is a variation of the Hunt and Kill algorithm. The difference in this generator is that instead of looping through the individual searches and path generations, path generations are recursivly called within the walk funciton. 
