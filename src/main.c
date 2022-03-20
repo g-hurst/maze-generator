@@ -5,13 +5,13 @@
 
 #define ROWS 15
 #define COLUMNS 15
-
+/*
 struct Maze{
     int rows, cols;
     char **arr;
     int **vis;
 };
-
+*/
 int main(){
     int rows = 15, cols = 15;
     char** mzStack = malloc(rows * sizeof(*mzStack));
@@ -27,10 +27,12 @@ int main(){
 
     outputTerminal(mzStack, rows, cols);    //outputs the maze to the terminal
 
+
     // frees allocated memory
     for (int i = 0; i < cols; i++) {
         free(mzStack[i]);
     }
     free(mzStack);
+
     return 0;
 }

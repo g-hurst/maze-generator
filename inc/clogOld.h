@@ -1,8 +1,8 @@
 #ifndef stdio_h
 #  include <stdio.h>
 #endif
-#ifndef unistd_h
-#  include <unistd.h>
+#ifndef windows_h
+#include <windows.h>
 #endif
 #ifndef stdbool_h
 #  include <stdbool.h>
@@ -28,25 +28,25 @@
 #    define log_addr(addr)		fprintf(stdout, "%s == %p\n",         (#addr), 	    (void*)(addr))
 
 #  	 define logf_(...)       	fprintf(stdout, __VA_ARGS__)
-#    define __mu_file_out__ 	isatty(STDOUT_FILENO)  				   
-#    define __mu_color(color, ...)         \
-		do{                               \
-			if (__mu_file_out__) {        \
-				logf_(color __VA_ARGS__); \
-				logf_(ANSI_RESET);	      \
-			}                             \
-			else{                         \
-				logf_(__VA_ARGS__);       \
-			}                             \
-		}while(false)
+// #    define __mu_file_out__ 	isatty(STDOUT_FILENO)  				   
+// #    define __mu_color(color, ...)         \
+// 		do{                               \
+// 			if (__mu_file_out__) {        \
+// 				logf_(color __VA_ARGS__); \
+// 				logf_(ANSI_RESET);	      \
+// 			}                             \
+// 			else{                         \
+// 				logf_(__VA_ARGS__);       \
+// 			}                             \
+// 		}while(false)
 
 
-#    define logf_red(...)     __mu_color(ANSI_RED,     __VA_ARGS__)
-#  	 define logf_green(...)   __mu_color(ANSI_GREEN,   __VA_ARGS__)
-#  	 define logf_yellow(...)  __mu_color(ANSI_YELLOW,  __VA_ARGS__)
-#  	 define logf_blue(...)    __mu_color(ANSI_BLUE,    __VA_ARGS__)
-#  	 define logf_magenta(...) __mu_color(ANSI_MAGENTA, __VA_ARGS__)
-#  	 define logf_cyan(...)    __mu_color(ANSI_CYAN,    __VA_ARGS__)
+// #    define logf_red(...)     __mu_color(ANSI_RED,     __VA_ARGS__)
+// #  	 define logf_green(...)   __mu_color(ANSI_GREEN,   __VA_ARGS__)
+// #  	 define logf_yellow(...)  __mu_color(ANSI_YELLOW,  __VA_ARGS__)
+// #  	 define logf_blue(...)    __mu_color(ANSI_BLUE,    __VA_ARGS__)
+// #  	 define logf_magenta(...) __mu_color(ANSI_MAGENTA, __VA_ARGS__)
+// #  	 define logf_cyan(...)    __mu_color(ANSI_CYAN,    __VA_ARGS__)
 
 #  else
 #    define log_msg(msg)
@@ -58,12 +58,12 @@
 #    define log_addr(addr)
 
 #    define logf_(format,        ...)
-#    define logf_red(format,     ...)
-#    define logf_green(format,   ...)
-#    define logf_yellow(format,  ...)
-#    define logf_blue(format,    ...)
-#    define logf_magenta(format, ...)
-#    define logf_cyan(format,    ...)
-#  endif
-#endif //nice-1
+// #    define logf_red(format,     ...)
+// #    define logf_green(format,   ...)
+// #    define logf_yellow(format,  ...)
+// #    define logf_blue(format,    ...)
+// #    define logf_magenta(format, ...)
+// #    define logf_cyan(format,    ...)
+ #  endif
+#endif 
 /* vim: set tabstop=4 shiftwidth=4 fileencoding=utf-8 noexpandtab: */

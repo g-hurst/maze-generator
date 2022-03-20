@@ -24,6 +24,7 @@ void outputText(char** maze, int rows, int cols)
         //prints end
         if(maze[i][cols - 1] == ' ') fputs(end, fp);
     }
+	fclose(fp);
 }
 
 //displays the maze to the terminal

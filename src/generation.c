@@ -8,7 +8,7 @@
 //function that generates the maze when given an array
 void generateMaze(char** maze, int rows, int cols){
     int visitations[ROWS][COLUMNS] = {0}; //array to keep track of what rooms have been visited
-    int x, y, i, j;
+    int i, j;
 
     srand(time(0));
     fillMaze(maze, rows, cols);
@@ -81,8 +81,7 @@ void walk(int i, int j, char** maze, int visitations[ROWS][COLUMNS], int rows, i
             else                    W = 1;
 
             //checks bounds and makes sure the room has not been visited
-            offLimits = outOfBounds(i + y, j + x, rows, cols);
-            offLimits += visitations[i + y][j + x] == 1;
+			offLimits = outOfBounds(i + y, j + x, rows, cols)? 1: visitations[i + y][j + x];
         }while(offLimits && canWalk);
     }
 
@@ -117,7 +116,7 @@ int findNextWalk(int *i, int *j, int visitations[ROWS][COLUMNS], int rows, int c
             }
 
             //check current room and adjacent south are different and the south is in bounds
-            else if(visitations[row][col] != visitations[row + 2][col] && !outOfBounds(row + 2, col, rows, cols)){
+            else if(!outOfBounds(row + 2, col, rows, cols) && visitations[row][col] != visitations[row + 2][col]){
                 //if the room has been visited set i and j
                 if(visitations[row][col]){
                     *i = row;
