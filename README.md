@@ -1,17 +1,27 @@
 # maze-generator
 
 ### How to run:
-
+**option 1:**
+1. run `make`
+   * creates the executable
+2.  run `generate_maze.exe [rows] [columns]`
+   * rows is the amount of rows the generated maze will contain
+   * cols is the amount of columns the generated maze will contain
+   * defaults to 25 if not specified
+**option 2:**
+1. run `make run ROWS=[rows] COLS=[columns]`
+   * rows is the amount of rows the generated maze will contain
+   * cols is the amount of columns the generated maze will contain
+   * defaults to 25 if not specified
+   
 ### Requirements to run this code:
 * maze rows and columns must be greater than three units
 * maze rows and columns must be odd numbers
 * if either of these is not met, a terminal message will prompt for an input to replace the invalid size
 
+### Algorithm:
 
 The algorithm used to generate the maze is a variation of the Hunt and Kill algorithm. The difference in this generator is that instead of looping through the individual searches and path generations, path generations are recursivly called within the walk funciton. 
-
-
-### algorithm is as follows:
 
 1. start at a random room and mark it as visited
 2. randomly select an adjacent, unvisited, in bounds room
