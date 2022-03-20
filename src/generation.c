@@ -8,7 +8,7 @@ void generateMaze(char** maze, int rows, int cols){
     int i, j;
 
 	int **visitations = malloc(rows * sizeof(*visitations));
-	for(int m = 0; m < cols; m++) {
+	for(int m = 0; m < rows; m++) {
         visitations[m] = malloc((cols + 1) * sizeof(*visitations[m]));
 		for(int n = 0; n < cols; n++) {
         	visitations[m][n] = 0;
@@ -26,7 +26,7 @@ void generateMaze(char** maze, int rows, int cols){
     createHoles(maze, rows, cols);
 
     // frees allocated memory
-    for (int m = 0; m < cols; m++) {
+    for (int m = 0; m < rows; m++) {
         free(visitations[m]);
     }
     free(visitations);
