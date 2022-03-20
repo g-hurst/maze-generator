@@ -41,13 +41,3 @@ void outputTerminal(char** maze, int rows, int cols){
         if(maze[i][cols - 1] == ' ') printf(" <--END");
     }
 }
-
-//displays the maze to the terminal
-void outputVisitationsTerminal(int visitations[ROWS][COLUMNS]){
-    for(int i = 0; i < ROWS; i++){
-        printf("\n");
-        for(int j = 0; j < COLUMNS; j++){
-            printf("%d", visitations[i][j]);
-        }
-    }
-}
