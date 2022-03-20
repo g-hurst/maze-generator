@@ -3,12 +3,20 @@
 #include <stdlib.h>
 #include "../inc/clog.h"
 
-int main(){
-    int rows, cols;
-	printf("Enter rows: ");
-	scanf("%d", &rows);
-	printf("Enter cols: ");
-	scanf("%d", &cols);
+int main(int argc, char* argv[]) {
+    int rows = atoi(argv[1]);
+	int cols = atoi(argv[2]);
+
+	while(rows < 3 || rows % 2 == 0) {
+		printf("Error: size must be greater than 3 and odd\n");
+		printf("Enter rows: ");
+		scanf("%d", &rows);
+	} 
+	while(cols < 3 || cols % 2 == 0) {
+		printf("Error: size must be greater than 3 and odd\n");
+		printf("Enter cols: ");
+		scanf("%d", &cols);
+	} 
 
     char** mzStack = malloc(rows * sizeof(*mzStack));
     for (int i = 0; i < rows; i++) {
